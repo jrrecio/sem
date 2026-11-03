@@ -1,0 +1,24 @@
+.hero {
+  position: relative;
+  min-height: 400px;
+  padding: 80px 0;
+  background-image: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72");
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+.title,
+.description {
+  color: white;
+}
+
+.control {
+  margin-top: 30px;
+}
