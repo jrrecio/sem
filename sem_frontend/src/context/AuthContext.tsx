@@ -1,15 +1,20 @@
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import type { ReactNode } from "react";
 import api from "../lib/api";
-import { Navigate } from "react-router";
-import { useNavigate } from "react-router";
 
+type Role = "admin" | "user";
 
 interface User {
   id: number;
   name: string;
   email: string;
+  role: Role;
 }
 
 interface AuthContextType {
@@ -34,54 +39,100 @@ interface RegisterResponse {
   data: User;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<
+  AuthContextType | undefined
+>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+function isUser(value: unknown): value is User {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const record = value as Record<string, unknown>;
+
+  return (
+    typeof record.id === "number" &&
+    typeof record.name === "string" &&
+    typeof record.email === "string" &&
+    (record.role === "admin" || record.role === "user")
+  );
+}
+
+export function AuthProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-const navigate = useNavigate()
-  // Restore session on page refresh
+
+  // Restore authenticated user on refresh
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      navigate("/login")
       setLoading(false);
       return;
     }
 
     api
-      .get<User>("/user")
-      .then((res) => setUser(res.data))
+      .get<unknown>("/user")
+      .then((res) => {
+        if (!isUser(res.data)) {
+          throw new Error("Invalid user data from Laravel");
+        }
+
+        setUser(res.data);
+      })
       .catch(() => {
         localStorage.removeItem("token");
         setUser(null);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
-  const login = async (email: string, password: string): Promise<void> => {
-    const { data } = await api.post<LoginResponse>("/login", {
-      email,
-      password,
-    });
+  // Login
+  const login = async (
+    email: string,
+    password: string
+  ): Promise<void> => {
+    const { data } = await api.post<LoginResponse>(
+      "/login",
+      {
+        email,
+        password,
+      }
+    );
+
+    if (!isUser(data.user)) {
+      throw new Error(
+        "Laravel login response is missing a valid user role"
+      );
+    }
 
     localStorage.setItem("token", data.token);
     setUser(data.user);
   };
 
+  // Register
   const register = async (
     name: string,
     email: string,
     password: string
   ): Promise<void> => {
-    await api.post<RegisterResponse>("/register", {
-      name,
-      email,
-      password,
-    });
+    await api.post<RegisterResponse>(
+      "/register",
+      {
+        name,
+        email,
+        password,
+      }
+    );
   };
 
+  // Logout
   const logout = async (): Promise<void> => {
     try {
       await api.post("/logout");
@@ -110,7 +161,9 @@ export function useAuth() {
   const ctx = useContext(AuthContext);
 
   if (!ctx) {
-    throw new Error("useAuth must be used inside AuthProvider");
+    throw new Error(
+      "useAuth must be used inside AuthProvider"
+    );
   }
 
   return ctx;

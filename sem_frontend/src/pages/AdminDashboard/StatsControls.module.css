@@ -1,3 +1,4 @@
+
 .root {
   background-image: linear-gradient(
     -60deg,
@@ -7,10 +8,7 @@
   padding: var(--mantine-spacing-xl);
   border-radius: var(--mantine-radius-md);
   display: flex;
-
-  @media (max-width: $mantine-breakpoint-xs) {
-    flex-direction: column;
-  }
+  gap: var(--mantine-spacing-md);
 }
 
 .icon {
@@ -22,13 +20,15 @@
 
 .stat {
   min-width: 98px;
-  padding-top: var(--mantine-spacing-xl);
+  padding: var(--mantine-spacing-md);
   min-height: 140px;
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--mantine-color-white);
+  border-radius: var(--mantine-radius-md);
+  text-align: center;
 }
 
 .label {
@@ -71,13 +71,6 @@
   display: flex;
   flex-direction: column;
   margin-right: calc(var(--mantine-spacing-xl) * 2);
-
-  @media (max-width: $mantine-breakpoint-xs) {
-    flex-direction: row;
-    align-items: center;
-    margin-right: 0;
-    margin-bottom: var(--mantine-spacing-xl);
-  }
 }
 
 .date {
@@ -94,22 +87,45 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
   border-radius: var(--mantine-radius-md);
-  transition: background-color 50ms ease;
+  transition: background-color 150ms ease;
+}
 
-  @media (max-width: $mantine-breakpoint-xs) {
+.control:hover {
+  background-color: var(--mantine-color-blue-5);
+  color: var(--mantine-color-white);
+}
+
+.controlIcon {
+  display: block;
+}
+
+@media (max-width: 576px) {
+  .root {
+    flex-direction: column;
+  }
+
+  .controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0;
+    margin-bottom: var(--mantine-spacing-xl);
+  }
+
+  .control {
     height: 34px;
     width: 34px;
   }
 
-  @mixin hover {
-    background-color: var(--mantine-color-blue-5);
-    color: var(--mantine-color-white);
-  }
-}
-
-.controlIcon {
-  @media (max-width: $mantine-breakpoint-xs) {
+  .controlIcon {
     transform: rotate(-90deg);
+  }
+
+  .stat {
+    min-height: 110px;
   }
 }

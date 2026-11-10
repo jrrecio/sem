@@ -1,0 +1,137 @@
+
+.sc-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+  padding: 22px 14px;
+  background: #0b1530;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.sc-brand {
+  padding: 8px 8px 22px;
+  flex-wrap: nowrap;
+}
+
+.sc-brand-icon {
+  background: linear-gradient(135deg, #4778ff, #7755ed);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.sc-brand-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.sc-brand-subtitle {
+  font-size: 10px;
+  color: #91a3c5;
+  margin-top: 2px;
+}
+
+.sc-divider {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.sc-role-section {
+  padding: 24px 10px 20px;
+}
+
+.sc-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #7185aa;
+  letter-spacing: 1.6px;
+  margin-bottom: 12px;
+}
+
+.sc-workspace-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #dce5ff;
+}
+
+.sc-role-badge {
+  background: rgba(91, 128, 255, 0.2);
+  color: #9cb7ff;
+  border: 1px solid rgba(125, 154, 255, 0.25);
+}
+
+.sc-nav {
+  flex: 1;
+}
+
+.sc-nav-label {
+  padding-left: 10px;
+  margin-top: 8px;
+}
+
+.sc-nav-link {
+  border-radius: 11px;
+  min-height: 46px;
+  padding: 5px 12px;
+  color: #a9b9d5;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sc-nav-link .mantine-NavLink-label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sc-nav-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+}
+
+.sc-nav-link[data-active],
+.sc-nav-link-active {
+  background: linear-gradient(90deg, #3157db, #4e60d9);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(36, 73, 200, 0.2);
+}
+
+.sc-nav-link[data-active]:hover {
+  background: linear-gradient(90deg, #3157db, #4e60d9);
+  color: #ffffff;
+}
+
+.sc-sidebar-bottom {
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.sc-logout {
+  margin-top: 16px;
+  border-radius: 10px;
+  color: #ff9fa9;
+  min-height: 44px;
+}
+
+.sc-logout:hover {
+  background: rgba(255, 87, 105, 0.12);
+  color: #ffb8c0;
+}
+
+.sc-footer {
+  font-size: 10px;
+  text-align: center;
+  color: #607395;
+  margin-top: 25px;
+}
+
+@media (max-width: 768px) {
+  .sc-sidebar {
+    padding: 16px 10px;
+  }
+
+  .sc-brand-title {
+    font-size: 18px;
+  }
+}

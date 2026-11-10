@@ -1,0 +1,155 @@
+
+.mp-page {
+  min-height: 100%;
+  padding: 28px;
+  background: #f5f7fc;
+}
+
+.mp-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #6479b0;
+  margin-bottom: 7px;
+}
+
+.mp-title {
+  font-size: 29px;
+  font-weight: 800;
+  color: #14213d;
+  letter-spacing: -0.6px;
+}
+
+.mp-subtitle {
+  font-size: 13px;
+  color: #7b879c;
+  margin-top: 7px;
+}
+
+.mp-stat-card {
+  background: #ffffff;
+  border: 1px solid #e7ebf4;
+  box-shadow: 0 3px 12px rgba(18, 35, 70, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mp-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(18, 35, 70, 0.07);
+}
+
+.mp-stat-value {
+  font-size: 30px;
+  font-weight: 800;
+  color: #152341;
+  line-height: 1.2;
+}
+
+.mp-stat-label {
+  font-size: 12px;
+  color: #8490a4;
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+.mp-content-panel {
+  background: #ffffff;
+  border: 1px solid #e7ebf4;
+  box-shadow: 0 3px 16px rgba(18, 35, 70, 0.03);
+}
+
+.mp-section-title {
+  color: #172541;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.mp-search {
+  width: 245px;
+}
+
+.mp-status-filter {
+  width: 155px;
+}
+
+.mp-event-card {
+  background: #ffffff;
+  border: 1px solid #e7ebf4;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.mp-event-card:hover {
+  border-color: #cbd5f5;
+  box-shadow: 0 9px 25px rgba(38, 62, 120, 0.08);
+  transform: translateY(-3px);
+}
+
+.mp-event-type {
+  font-size: 10px;
+  font-weight: 800;
+  color: #4c62c8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 7px;
+}
+
+.mp-event-title {
+  font-size: 17px;
+  font-weight: 750;
+  color: #172541;
+  line-height: 1.4;
+}
+
+.mp-description {
+  min-height: 55px;
+  line-height: 1.6;
+}
+
+.mp-status-box {
+  padding: 12px;
+  border-radius: 9px;
+  background: #f5f7fc;
+  color: #6d7a91;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.mp-status-box svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 1100px) {
+  .mp-section-header {
+    flex-wrap: wrap;
+  }
+
+  .mp-filters {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mp-page {
+    padding: 16px;
+  }
+
+  .mp-title {
+    font-size: 24px;
+  }
+
+  .mp-header {
+    align-items: flex-start;
+  }
+
+  .mp-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mp-search,
+  .mp-status-filter {
+    width: 100%;
+  }
+}

@@ -1,0 +1,97 @@
+
+.au-page {
+  min-height: 100%;
+  padding: 28px;
+  background: #f5f7fc;
+}
+
+.au-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #6479b0;
+  margin-bottom: 7px;
+}
+
+.au-page-title {
+  font-size: 29px;
+  font-weight: 800;
+  color: #14213d;
+  letter-spacing: -0.6px;
+}
+
+.au-page-subtitle {
+  font-size: 13px;
+  color: #7b879c;
+  margin-top: 7px;
+}
+
+.au-form-panel {
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e7ebf4;
+  box-shadow: 0 4px 20px rgba(18, 35, 70, 0.03);
+}
+
+.au-section-title {
+  color: #172541;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.au-form-section-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #68799b;
+  letter-spacing: 1.2px;
+  margin-bottom: 16px;
+}
+
+.au-role-option {
+  padding: 16px;
+  cursor: pointer;
+  border: 1px solid #e6eaf2;
+  transition: all 0.2s ease;
+}
+
+.au-role-option:hover {
+  border-color: #b6c3f6;
+  background: #fafbff;
+}
+
+.au-role-selected {
+  border-color: #5268db;
+  background: #f5f7ff;
+  box-shadow: 0 0 0 1px rgba(82, 104, 219, 0.12);
+}
+
+.au-info-panel {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e7ebf4;
+}
+
+.au-help-panel {
+  padding: 24px;
+  background: #eef1ff;
+  border: 1px solid #dce3ff;
+}
+
+@media (max-width: 768px) {
+  .au-page {
+    padding: 16px;
+  }
+
+  .au-page-title {
+    font-size: 24px;
+  }
+
+  .au-form-panel {
+    padding: 18px;
+  }
+
+  .au-info-panel,
+  .au-help-panel {
+    padding: 18px;
+  }
+}

@@ -1,0 +1,121 @@
+
+.sc-appshell {
+  background: #f5f7fc;
+}
+
+/* Header */
+.sc-topbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e8ecf4;
+  box-shadow: 0 2px 12px rgba(20, 33, 61, 0.04);
+}
+
+.sc-header-logo {
+  background: linear-gradient(135deg, #4168e8, #7658eb);
+  color: white;
+}
+
+.sc-topbar-title {
+  color: #172541;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.sc-topbar-subtitle {
+  color: #8a96aa;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.sc-header-role {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  padding: 8px 12px;
+  height: auto;
+}
+
+.sc-header-notifications {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sc-topbar-divider {
+  height: 32px;
+  width: 1px;
+  background: #e8ecf4;
+}
+
+.sc-profile-button {
+  padding: 6px 10px;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.sc-profile-button:hover {
+  background: #f4f6fb;
+}
+
+.sc-profile-name {
+  color: #172541;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.sc-profile-role {
+  color: #8a96aa;
+  font-size: 11px;
+}
+
+.sc-profile-chevron {
+  color: #8792a7;
+}
+
+/* Sidebar */
+.sc-app-navbar {
+  background: #0b1530;
+  overflow-y: auto;
+}
+
+/* Main */
+.sc-app-main {
+  background: #f5f7fc;
+  min-height: 100vh;
+}
+
+.sc-main-content {
+  min-height: calc(100vh - 76px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sc-topbar-title {
+    font-size: 15px;
+  }
+
+  .sc-topbar-subtitle {
+    display: none;
+  }
+
+  .sc-profile-info {
+    display: none;
+  }
+
+  .sc-topbar-divider {
+    display: none;
+  }
+
+  .sc-profile-button {
+    padding: 4px;
+  }
+
+  .sc-header-role {
+    display: none;
+  }
+
+  .sc-main-content {
+    min-height: calc(100vh - 76px);
+  }
+}
