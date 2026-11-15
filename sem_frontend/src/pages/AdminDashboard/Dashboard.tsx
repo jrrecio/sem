@@ -18,7 +18,6 @@ import {
 import {
   IconArrowRight,
   IconCalendarEvent,
-  IconCalendarPlus,
   IconCheck,
   IconClipboardCheck,
   IconClock,
