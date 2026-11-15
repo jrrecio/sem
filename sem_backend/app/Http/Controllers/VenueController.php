@@ -4,62 +4,98 @@ namespace App\Http\Controllers;
 
 use App\Models\Venue;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class VenueController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Check whether the logged-in user is an Admin
+    private function isAdmin()
+    {
+        return Auth::user()?->role === 'admin';
+    }
+
+    // GET - Retrieve all venues
     public function index()
     {
-        //
+        return response()->json(
+            Venue::orderBy('name')->get()
+        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    // POST - Create a new venue
     public function store(Request $request)
     {
-        //
+        // Admin only
+        if (!$this->isAdmin()) {
+            return response()->json([
+                'message' => 'Unauthorized. Admin access only.'
+            ], 403);
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:venues,name',
+            'location' => 'required|string|max:255',
+            'capacity' => 'required|integer|min:1',
+            'description' => 'nullable|string',
+            'facilities' => 'nullable|array',
+            'facilities.*' => 'string|max:255',
+            'status' => 'sometimes|in:active,inactive,maintenance',
+        ]);
+
+        $venue = Venue::create($validated);
+
+        return response()->json([
+            'message' => 'Venue created successfully.',
+            'venue' => $venue,
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // GET - Retrieve a specific venue
     public function show(Venue $venue)
     {
-        //
+        return response()->json($venue);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Venue $venue)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    // PUT/PATCH - Update venue details
     public function update(Request $request, Venue $venue)
     {
-        //
+        // Admin only
+        if (!$this->isAdmin()) {
+            return response()->json([
+                'message' => 'Unauthorized. Admin access only.'
+            ], 403);
+        }
+
+        $validated = $request->validate([
+            'name' => [
+                'sometimes',
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('venues', 'name')->ignore($venue->id),
+            ],
+            'location' => 'sometimes|required|string|max:255',
+            'capacity' => 'sometimes|required|integer|min:1',
+            'description' => 'nullable|string',
+            'facilities' => 'nullable|array',
+            'facilities.*' => 'string|max:255',
+            'status' => 'sometimes|in:active,inactive,maintenance',
+        ]);
+
+        $venue->update($validated);
+
+        return response()->json([
+            'message' => 'Venue updated successfully.',
+            'venue' => $venue,
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // DELETE - Temporarily disabled
     public function destroy(Venue $venue)
     {
-        //
+        return response()->json([
+            'message' => 'Venue deletion is disabled until reservation safeguards are implemented.'
+        ], 403);
     }
 }

@@ -22,8 +22,8 @@ import {
   IconBuildingCommunity,
   IconChevronRight,
   IconUserCheck,
+IconActivity 
 } from "@tabler/icons-react";
-
 import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import "./sidebar.css";
@@ -96,8 +96,20 @@ export function Sidebar({ userRole }: SidebarProps) {
   icon: IconUserCheck,
   path: "/event-role-assignment",
   roles: ["admin"],
-}
+},
+{
+  label: "Event Monitoring",
+  icon: IconActivity,
+  path: "/event-monitoring",
+  roles: ["admin", "user"],
+    },
 
+    {
+  label: "Venue Management",
+  icon: IconActivity,
+  path: "/venue-management",
+  roles: ["admin", "user"],
+},
     
   ];
 

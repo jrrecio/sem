@@ -14,6 +14,8 @@ import AppShellLayout from "../layouts/AppShellLayout";
 import EventApproval from "../pages/EventApproval/EventApproval";
 import EventManagement from "../pages/EventManagement/EventManagement";
 import { EventRoleAssignment } from "../pages/EventRoleAssignment/EventRoleAssignment";
+import EventMonitoring from "../pages/eventmonitoring/EventMonitoring";
+import VenueManagement from "../pages/venue/VenueManagement";
 
 type Role = "admin" | "user";
 
@@ -106,6 +108,7 @@ function DashboardRedirect() {
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* PUBLIC ROUTES */}
       <Route
         path="/"
         element={<DashboardRedirect />}
@@ -116,12 +119,15 @@ export default function AppRoutes() {
         element={<Login />}
       />
 
+      {/* ROUTES WITH SIDEBAR AND HEADER */}
       <Route element={<AppShellLayout />}>
+
         <Route
           path="/dashboard"
           element={<DashboardRedirect />}
         />
 
+        {/* ADMIN DASHBOARD */}
         <Route
           path="/admin/dashboard"
           element={
@@ -131,6 +137,7 @@ export default function AppRoutes() {
           }
         />
 
+        {/* USER DASHBOARD */}
         <Route
           path="/user/dashboard"
           element={
@@ -140,6 +147,7 @@ export default function AppRoutes() {
           }
         />
 
+        {/* CREATE EVENT */}
         <Route
           path="/create-event"
           element={
@@ -149,6 +157,7 @@ export default function AppRoutes() {
           }
         />
 
+        {/* MY PROPOSALS */}
         <Route
           path="/users"
           element={
@@ -158,6 +167,7 @@ export default function AppRoutes() {
           }
         />
 
+        {/* EVENT MANAGEMENT - ADMIN ONLY */}
         <Route
           path="/event-management"
           element={
@@ -167,6 +177,7 @@ export default function AppRoutes() {
           }
         />
 
+        {/* ADD USER - ADMIN ONLY */}
         <Route
           path="/AddUser"
           element={
@@ -176,6 +187,7 @@ export default function AppRoutes() {
           }
         />
 
+        {/* EVENT APPROVAL */}
         <Route
           path="/event-approval"
           element={
@@ -185,6 +197,7 @@ export default function AppRoutes() {
           }
         />
 
+        {/* HOME */}
         <Route
           path="/home"
           element={
@@ -193,7 +206,9 @@ export default function AppRoutes() {
             </AuthRoute>
           }
         />
-            <Route
+
+        {/* EVENT ROLE ASSIGNMENT - ADMIN ONLY */}
+        <Route
           path="/event-role-assignment"
           element={
             <RoleRoute role="admin">
@@ -201,8 +216,28 @@ export default function AppRoutes() {
             </RoleRoute>
           }
         />
+
+        {/* EVENT MONITORING - ADMIN AND USER */}
+        <Route
+          path="/event-monitoring"
+          element={
+            <AuthRoute>
+              <EventMonitoring />
+            </AuthRoute>
+          }
+        />
+        <Route
+  path="/venue-management"
+  element={
+    <RoleRoute role="admin">
+      <VenueManagement />
+    </RoleRoute>
+  }
+/>
+
       </Route>
 
+      {/* FALLBACK ROUTE */}
       <Route
         path="*"
         element={<DashboardRedirect />}

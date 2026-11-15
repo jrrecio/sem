@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 
 class EventAssignmentController extends Controller
 {
+
     // ====================================
     // ADMIN: GET ELIGIBLE STUDENTS
     // ====================================
@@ -139,6 +140,66 @@ class EventAssignmentController extends Controller
             )
             ->latest()
             ->get();
+    }
+    // ============================================================
+    // UPDATE EVENT ASSIGNMENT
+    // Purpose: Change an existing assigned student.
+    // ============================================================
+
+    public function update(Request $request, EventAssignment $assignment)
+    {
+        // Check administrator access
+        $user = $request->user();
+
+        if (!$user || $user->role !== 'admin') {
+            return response()->json([
+                'message' => 'Unauthorized action.'
+            ], 403);
+        }
+
+        // Validate the selected student and role
+        $validated = $request->validate([
+            'user_id' => 'required|integer|exists:users,id',
+            'event_role' => 'required|string|max:100',
+        ]);
+
+        // Prevent duplicate assignments
+        $duplicate = EventAssignment::where('event_id', $assignment->event_id)
+            ->where('user_id', $validated['user_id'])
+            ->where('event_role', $validated['event_role'])
+            ->where('id', '!=', $assignment->id)
+            ->exists();
+
+        if ($duplicate) {
+            return response()->json([
+                'message' => 'This student already has this role in the event.'
+            ], 422);
+        }
+
+        // Prevent multiple main coordinators
+        if ($validated['event_role'] === 'Event Coordinator') {
+            $hasOtherCoordinator = EventAssignment::where(
+                'event_id',
+                $assignment->event_id
+            )
+                ->where('event_role', 'Event Coordinator')
+                ->where('id', '!=', $assignment->id)
+                ->exists();
+
+            if ($hasOtherCoordinator) {
+                return response()->json([
+                    'message' => 'This event already has a main coordinator.'
+                ], 422);
+            }
+        }
+
+        // Update the assignment
+        $assignment->update($validated);
+
+        return response()->json([
+            'message' => 'Event assignment updated successfully.',
+            'assignment' => $assignment->load('student'),
+        ], 200);
     }
 
     // ====================================
